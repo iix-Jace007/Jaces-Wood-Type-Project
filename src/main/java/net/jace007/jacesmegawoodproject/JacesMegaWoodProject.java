@@ -1,6 +1,7 @@
 package net.jace007.jacesmegawoodproject;
 
 import com.mojang.logging.LogUtils;
+import net.jace007.jacesmegawoodproject.block.ModBlocks;
 import net.jace007.jacesmegawoodproject.item.ModCreativeModTabs;
 import net.jace007.jacesmegawoodproject.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -30,6 +31,7 @@ public class JacesMegaWoodProject {
         IEventBus modEventBus = context.getModEventBus();
 
         ModCreativeModTabs.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         ModItems.register(modEventBus);
 
