@@ -1,6 +1,8 @@
 package net.jace007.jacesmegawoodproject;
 
 import com.mojang.logging.LogUtils;
+import net.jace007.jacesmegawoodproject.item.ModCreativeModTabs;
+import net.jace007.jacesmegawoodproject.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,13 +21,17 @@ import org.slf4j.Logger;
 @Mod(net.jace007.jacesmegawoodproject.JacesMegaWoodProject.MOD_ID)
 public class JacesMegaWoodProject {
     // Define mod id in a common place for everything to reference
-    public static final String MOD_ID = "jaces_mega_wood_project";
+    public static final String MOD_ID = "jacesmegawoodproject";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public JacesMegaWoodProject(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
+
+        ModCreativeModTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -42,9 +48,12 @@ public class JacesMegaWoodProject {
     }
 
     // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.ABADON_STICK);
+            event.accept(ModItems.ABU_STICK);
 
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
